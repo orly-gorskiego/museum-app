@@ -24,4 +24,5 @@ module.exports = {
     "react/jsx-indent": 0,
     "max-len": 1,
   },
+  "globals": { "fetch": false }
 }

@@ -1,14 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
-import { API_KEY } from 'react-native-dotenv'
+import { View, Text, FlatList } from 'react-native'
+import sendRequest from '@api/client'
+
+const Item = ({ name }) => (
+  <View style={{
+    padding: 10, borderWidth: 1, borderColor: 'tomato', backgroundColor: 'pink',
+  }}
+  >
+    <Text>{name}</Text>
+  </View>
+)
 
 const DataFetcher = () => {
-  console.log(API_KEY)
-  const [data, setData] = useState({})
+  const [galleries, setGalleries] = useState([])
+
+  const fetchData = async () => {
+    const data = await sendRequest('GET', 'gallery')
+    const formattedData = await data.json()
+    const { records } = formattedData
+    setGalleries(records)
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <View>
-      <Text>Data</Text>
+      <FlatList
+        data={galleries}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+        renderItem={({ item }) => <Item {...item} />}
+      />
     </View>
   )
 }
