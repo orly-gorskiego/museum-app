@@ -5,7 +5,8 @@
       {
         "root": ["./src"],
         "alias": {
-          "@helpers": "./helpers.js"
+          "@helpers": "./helpers.js",
+          "@api": "./api"
         }
       }
     ]
