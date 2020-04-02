@@ -9,5 +9,6 @@
         }
       }
     ]
-  ]
+  ],
+  "presets": ["module:react-native-dotenv"]
 }
